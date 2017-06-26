@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ApiCarRental;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -78,24 +79,57 @@ namespace CarrentalWeb
             }
         }
 
-        public static List<Usuario> GetUsuarios()
+
+        public static List<Marca> GetMarca()
         {
-            List<Usuario> usuarios = null;
+            List<Marca> marca = null;
+            // PREPARO LA CONSULTA SQL PARA OBTENER LOS USUARIOS
+            string consultaSQL = "dbo.GetMarca";
+            // PREPARO UN COMANDO PARA EJECUTAR A LA BASE DE DATOS
+            SqlCommand comando = new SqlCommand(consultaSQL, conexion);
+            comando.CommandType = CommandType.StoredProcedure;            
+
+            // RECOJO LOS DATOS
+            SqlDataReader reader = comando.ExecuteReader();
+            marca = new List<Marca>();
+
+            while (reader.Read())
+            {
+                marca.Add(new Marca()
+                {
+                id = (int)reader["id"],
+                denominacion = reader["denominacion"].ToString()
+                });
+            }
+
+            // DEVUELVO LOS DATOS
+            return marca;
+        }
+
+        public static List<Usuarios> GetUsuarios()
+        {
+            List<Usuarios> usuarios = null;
             // PREPARO LA CONSULTA SQL PARA OBTENER LOS USUARIOS
             string consultaSQL = "dbo.GetUsuarios";
             // PREPARO UN COMANDO PARA EJECUTAR A LA BASE DE DATOS
             SqlCommand comando = new SqlCommand(consultaSQL, conexion);
-            comando.CommandType = CommandType.StoredProcedure;
-            comando.Parameters.Add(new SqlParameter());                
+            comando.CommandType = CommandType.StoredProcedure;               
 
             // RECOJO LOS DATOS
             SqlDataReader reader = comando.ExecuteReader();
-            usuarios = new List<Usuario>();
+            usuarios = new List<Usuarios>();
 
             while (reader.Read())
             {
-                usuarios.Add(new Usuario()
+                usuarios.Add(new Usuarios()
                 {
+                    idUsuario = (int)reader["idUsuario"],
+                    nif = reader["nif"].ToString(),
+                    nombre = reader["nombre"].ToString(),
+                    apellidos = reader["apellidos"].ToString(),
+                    email = reader["email"].ToString(),
+                    password = reader["password"].ToString(),
+                    fechaNacimiento = (DateTime)reader["fechaNacimiento"]
                 });
             }
 
@@ -103,9 +137,9 @@ namespace CarrentalWeb
             return usuarios;
         }
 
-        public static List<Usuario> Login(string email, string password)
+        public static List<Usuarios> Login(string email, string password)
         {
-            List<Usuario> usuarios = null;
+            List<Usuarios> usuarios = null;
             // PREPARO LA CONSULTA SQL PARA OBTENER LOS USUARIOS
             string consultaSQL = "dbo.Login";
             // PREPARO UN COMANDO PARA EJECUTAR A LA BASE DE DATOS
@@ -125,11 +159,11 @@ namespace CarrentalWeb
             });
             // RECOJO LOS DATOS
             SqlDataReader reader = comando.ExecuteReader();
-            usuarios = new List<Usuario>();
+            usuarios = new List<Usuarios>();
 
             while (reader.Read())
             {
-                usuarios.Add(new Usuario()
+                usuarios.Add(new Usuarios()
                 {
                     idUsuario = int.Parse(reader["idUsuario"].ToString()),
                     email = reader["email"].ToString(),
@@ -145,7 +179,7 @@ namespace CarrentalWeb
             return usuarios;
         }
 
-        public static int EliminarUsuario(int idUsuario)
+        public static int EliminarUsuario(int id)
         {
             // PREPARO LA CONSULTA SQL PARA ELIMINAR AL NUEVO USUARIO
             string consultaSQL = "dbo.EliminarUsuario";
@@ -154,8 +188,26 @@ namespace CarrentalWeb
             comando.CommandType = CommandType.StoredProcedure;
             comando.Parameters.Add(new SqlParameter()
             {
-                ParameterName = "idUsuario",
-                Value = idUsuario,
+                ParameterName = "id",
+                Value = id,
+                SqlDbType = SqlDbType.Int
+            });
+            // EJECUTO EL COMANDO
+            int filasAfectadas = comando.ExecuteNonQuery();
+            return filasAfectadas;
+        }
+
+        public static int EliminarMarca(int id)
+        {
+            // PREPARO LA CONSULTA SQL PARA ELIMINAR AL NUEVO USUARIO
+            string consultaSQL = "dbo.EliminarMarca";
+            // PREPARO UN COMANDO PARA EJECUTAR A LA BASE DE DATOS
+            SqlCommand comando = new SqlCommand(consultaSQL, conexion);
+            comando.CommandType = CommandType.StoredProcedure;
+            comando.Parameters.Add(new SqlParameter()
+            {
+                ParameterName = "id",
+                Value = id,
                 SqlDbType = SqlDbType.Int
             });
             // EJECUTO EL COMANDO

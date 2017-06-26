@@ -289,6 +289,7 @@
     <Content Include="plantilla\sidebar-mini-example.html" />
     <Content Include="plantilla\tables\bootstrap-table.html" />
     <Content Include="formulario.html" />
+    <Content Include="marcas.html" />
     <Content Include="usuarios.html" />
     <Content Include="plantilla\tables\datatables.net.html" />
     <Content Include="plantilla\tables\extended.html" />
@@ -298,13 +299,17 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MarcasController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="db\Db.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Coche.cs" />
     <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\Marca.cs" />
     <Compile Include="Models\RespuestaAPI.cs" />
+    <Compile Include="Models\TipoCombustible.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

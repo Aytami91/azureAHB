@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CarrentalWeb
 {
-    public class Usuario
+    public class Usuarios
     {
         public int idUsuario { get; set; }
         public string email { get; set; }

@@ -1,23 +1,24 @@
-﻿using System;
+﻿using ApiCarRental;
+using System;
 using System.Collections.Generic;
 using System.Web.Http;
 
 namespace CarrentalWeb.Controllers
 {
-    public class UsuariosController : ApiController
+    public class MarcasController
     {
-        // GET: api/Usuarios
+        // GET: api/Marcas
         public RespuestaAPI Get()
         {
             RespuestaAPI resultado = new RespuestaAPI();
-            List<Usuarios> usuarios = new List<Usuarios>();
+            List<Marca> marca = new List<Marca>();
             try
             {
                 Db.Conectar();
 
                 if (Db.EstaLaConexionAbierta())
                 {
-                    usuarios = Db.GetUsuarios();
+                    marca = Db.GetMarca();
                 }
                 resultado.error = "";
                 Db.Desconectar();
@@ -27,28 +28,28 @@ namespace CarrentalWeb.Controllers
                 resultado.error = "Se produjo un error";
             }
 
-            resultado.totalElementos = usuarios.Count;
-            resultado.dataUsuario = usuarios;
+            resultado.totalElementos = marca.Count;
+            resultado.dataMarcas = marca;
             return resultado;
         }
 
-        // GET: api/Usuarios/5
+        // GET: api/Marcas/5
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST: api/Usuarios
+        // POST: api/Marcas
         public void Post([FromBody]string value)
         {
         }
 
-        // PUT: api/Usuarios/5
+        // PUT: api/Marcas/5
         public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE: api/Usuarios/5
+        // DELETE: api/Marcas/5
         [HttpDelete]
         public RespuestaAPI Delete(int id)
         {
@@ -60,7 +61,7 @@ namespace CarrentalWeb.Controllers
 
                 if (Db.EstaLaConexionAbierta())
                 {
-                    filasAfectadas = Db.EliminarUsuario(id);
+                    filasAfectadas = Db.EliminarMarca(id);
                 }
                 resultado.error = "";
                 Db.Desconectar();
@@ -71,7 +72,7 @@ namespace CarrentalWeb.Controllers
             }
 
             resultado.totalElementos = filasAfectadas;
-            resultado.dataUsuario = null;
+            resultado.dataMarcas = null;
             return resultado;
         }
     }

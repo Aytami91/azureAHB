@@ -466,34 +466,18 @@
 		            searchPlaceholder: "Buscar...",
 		        },
 		        ajax: {
-		            url: '/api/usuarios',
+		            url: '/api/Marcas',
 		            dataSrc: 'dataUsuario'
 		        },
 		        columns: [
                     {
                         title: 'ID',
-                        data: 'idUsuario',
+                        data: 'idMarca',
                         visible: false
                     },
                     {
-                        title: 'NIF',
-                        data: 'nif'
-                    },
-                    {
-                        title: 'Email',
-                        data: 'email'
-                    },
-                    {
-                        title: 'Nombre',
-                        data: 'nombre'
-                    },
-                    {
-                        title: 'Apellidos',
-                        data: 'apellidos'
-                    },
-                    {
-                        title: 'F. Nacimiento',
-                        data: 'fechaNacimiento'
+                        title: 'denominacion',
+                        data: 'denominacion'
                     },
                     {
                         title: 'Acciones'
@@ -509,16 +493,7 @@
                 //        }
                 //    }
 		        //],
-		        columnDefs: [
-                    {
-                        'render': function (data, type, row) {
-                            var contentHTML = '';
-                            var fecha = new Date(row['fechaNacimiento']);
-                            contentHTML += fecha.getDate() + '/' + (fecha.getMonth() + 1) + '/' + fecha.getFullYear();
-                            return contentHTML;
-                        },
-                        'targets': 5
-                    },
+		        columnDefs: [                                      
                     {
                         'render': function (data, type, row) {
                             var contentHTML = '';
@@ -527,15 +502,15 @@
                             contentHTML += '<a href="#" class="btn btn-simple btn-danger btn-icon remove"><i class="fa fa-times"></i></a>';
                             return contentHTML;
                         },
-                        'targets': 6
+                        'targets': 2
                     }
 		        ]
                 ,
 		        rowCallback: (row, data, index) => {
 
-		            $('.view', row).unbind('click').bind('click', () => verDetalle(data.idUsuario, row));
-		            $('.edit', row).unbind('click').bind('click', () => editar(data.idUsuario, row));
-		            $('.remove', row).unbind('click').bind('click', () => eliminar(data.idUsuario, row));
+		            $('.view', row).unbind('click').bind('click', () => verDetalle(data.idMarca, row));
+		            $('.edit', row).unbind('click').bind('click', () => editar(data.idMarca, row));
+		            $('.remove', row).unbind('click').bind('click', () => eliminar(data.idMarca, row));
 
 		            return row;
 		        }
@@ -555,7 +530,7 @@
 		        if (confirm('Estás seguro de eliminar?')) {
 
 		            $.ajax({
-		                url: `/api/usuarios/${id}`,
+		                url: `/api/Marcas/${id}`,
 		                type: "DELETE",
 		                success: function (respuesta) {
 		                    var table = $('#datatables').DataTable();

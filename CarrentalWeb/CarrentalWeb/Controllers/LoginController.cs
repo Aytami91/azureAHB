@@ -14,7 +14,7 @@ namespace CarrentalWeb
         public RespuestaAPI Get([FromBody]Login login)
         {
             RespuestaAPI resultado = new RespuestaAPI();
-            List<Usuario> usuarios = new List<Usuario>();
+            List<Usuarios> usuarios = new List<Usuarios>();
             try
             {
                 Db.Conectar();
@@ -48,7 +48,7 @@ namespace CarrentalWeb
         public RespuestaAPI Post([FromBody]Login login)
         {
             RespuestaAPI resultado = new RespuestaAPI();
-            List<Usuario> usuarios = new List<Usuario>();
+            List<Usuarios> usuarios = new List<Usuarios>();
             try
             {
                 Db.Conectar();
