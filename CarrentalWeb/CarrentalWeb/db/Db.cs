@@ -147,7 +147,7 @@ namespace CarrentalWeb
 
         public static int EliminarUsuario(int idUsuario)
         {
-            // PREPARO LA CONSULTA SQL PARA INSERTAR AL NUEVO USUARIO
+            // PREPARO LA CONSULTA SQL PARA ELIMINAR AL NUEVO USUARIO
             string consultaSQL = "dbo.EliminarUsuario";
             // PREPARO UN COMANDO PARA EJECUTAR A LA BASE DE DATOS
             SqlCommand comando = new SqlCommand(consultaSQL, conexion);
