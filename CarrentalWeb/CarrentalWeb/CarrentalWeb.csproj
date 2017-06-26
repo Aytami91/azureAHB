@@ -261,6 +261,7 @@
     <Content Include="assets\js\utilidades.js" />
     <Content Include="Global.asax" />
     <Content Include="js\Dashboard.js" />
+    <Content Include="js\marcaDetalle.js" />
     <Content Include="js\usuarios.js" />
     <Content Include="login.html" />
     <Content Include="plantilla\calendar.html" />
@@ -290,6 +291,7 @@
     <Content Include="plantilla\tables\bootstrap-table.html" />
     <Content Include="formulario.html" />
     <Content Include="marcas.html" />
+    <Content Include="marcaDetalle.html" />
     <Content Include="usuarios.html" />
     <Content Include="plantilla\tables\datatables.net.html" />
     <Content Include="plantilla\tables\extended.html" />

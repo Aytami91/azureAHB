@@ -84,7 +84,7 @@ namespace CarrentalWeb
         {
             List<Marca> marca = null;
             // PREPARO LA CONSULTA SQL PARA OBTENER LOS USUARIOS
-            string consultaSQL = "dbo.GetMarca";
+            string consultaSQL = "dbo.GetMarcasPorId";
             // PREPARO UN COMANDO PARA EJECUTAR A LA BASE DE DATOS
             SqlCommand comando = new SqlCommand(consultaSQL, conexion);
             comando.CommandType = CommandType.StoredProcedure;            
