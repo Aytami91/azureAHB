@@ -17,6 +17,7 @@
                 $('#resultados').html(contenido);
 
             }
+            cargarDetalle();
         });
     }
- 
+})
