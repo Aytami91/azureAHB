@@ -79,7 +79,6 @@ namespace CarrentalWeb
             }
         }
 
-
         public static List<Marca> GetMarca()
         {
             List<Marca> marca = null;
@@ -200,7 +199,7 @@ namespace CarrentalWeb
 
         public static int EliminarMarca(int id)
         {
-            // PREPARO LA CONSULTA SQL PARA ELIMINAR AL NUEVO USUARIO
+            // PREPARO LA CONSULTA SQL PARA INSERTAR AL NUEVO USUARIO
             string consultaSQL = "dbo.EliminarMarca";
             // PREPARO UN COMANDO PARA EJECUTAR A LA BASE DE DATOS
             SqlCommand comando = new SqlCommand(consultaSQL, conexion);
@@ -215,7 +214,26 @@ namespace CarrentalWeb
             int filasAfectadas = comando.ExecuteNonQuery();
             return filasAfectadas;
         }
-    }          
+
+        public static List<Marca> ActualizarMarca(Marca marca)
+        {
+            List<Marca> resultados = new List<Marca>();
+            string procedimientoAEjecutar = "dbo.ActualizarMarca";
+
+            SqlCommand comando = new SqlCommand(procedimientoAEjecutar, conexion);
+            comando.CommandType = CommandType.StoredProcedure;
+            SqlDataReader reader = comando.ExecuteReader();
+            while (reader.Read())
+            {
+                marca.id = (long)reader["id"];
+                marca.denominacion = reader["denominacion"].ToString();
+                resultados.Add(marca);
+            }
+            //EJECUTO EL COMANDO
+            //comando.ExecuteNonQuery();
+            return resultados;
+        }
+    }
 }
 //        public static List<MarcasNCoches> DameListaMarcasNCoches()
 //        {

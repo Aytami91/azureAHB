@@ -1,11 +1,12 @@
 ﻿$(document).ready(function () {
-    //defino la funcion que consultara los datos del api
+
+    // DEFINO LA FUNCIÓN QUE CONSULTARÁ LOS DATOS DEL API
     function cargarDetalle() {
 
         var id = window.location.search.substring(1).split('=')[1];
 
         // PREPARAR LA LLAMDA AJAX 
-        $.get(`/api/marcas/${id}`, function (respuesta, estado) {            
+        $.get(`/api/marcas/${id}`, function (respuesta, estado) {
             $('#resultados').html('');
             // COMPRUEBO EL ESTADO DE LA LLAMADA
             if (estado === 'success') {
@@ -17,7 +18,9 @@
                 $('#resultados').html(contenido);
 
             }
-            cargarDetalle();
         });
     }
-})
+
+    // EJECUTO LA FUNCIÓN QUE CONSULTARÁ LOS DATOS DEL API
+    cargarDetalle();
+});

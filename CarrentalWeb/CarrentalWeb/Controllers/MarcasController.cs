@@ -44,24 +44,20 @@ namespace CarrentalWeb.Controllers
         {
         }
 
-        // PUT: api/Marcas/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
 
-        // DELETE: api/Marcas/5
-        [HttpDelete]
-        public RespuestaAPI Delete(int id)
+        [HttpPut]
+        // PUT: api/Marcas/5
+        public RespuestaAPI Put(int id, [FromBody]Marca marca)
         {
             RespuestaAPI resultado = new RespuestaAPI();
-            int filasAfectadas = 0;
+            List<Marca> filasAfectadas = new List<Marca>();
             try
             {
                 Db.Conectar();
 
                 if (Db.EstaLaConexionAbierta())
                 {
-                    filasAfectadas = Db.EliminarMarca(id);
+                    filasAfectadas = Db.ActualizarMarca(id);
                 }
                 resultado.error = "";
                 Db.Desconectar();
@@ -74,6 +70,34 @@ namespace CarrentalWeb.Controllers
             resultado.totalElementos = filasAfectadas;
             resultado.dataMarcas = null;
             return resultado;
+        }
+    
+
+    // DELETE: api/Marcas/5
+    [HttpDelete]
+    public RespuestaAPI Delete(int id)
+    {
+        RespuestaAPI resultado = new RespuestaAPI();
+        int filasAfectadas = 0;
+        try
+        {
+            Db.Conectar();
+
+            if (Db.EstaLaConexionAbierta())
+            {
+                filasAfectadas = Db.EliminarMarca(id);
+            }
+            resultado.error = "";
+            Db.Desconectar();
+        }
+        catch (Exception ex)
+        {
+            resultado.error = "Se produjo un error";
+        }
+
+        resultado.totalElementos = filasAfectadas;
+        resultado.dataMarcas = null;
+        return resultado;
         }
     }
 }
