@@ -1,4 +1,4 @@
-﻿using ApiCarRental;
+﻿using CarrentalWeb;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -79,11 +79,32 @@ namespace CarrentalWeb
             }
         }
 
+        public static List<TipoCombustible> GetTiposCombustibles()
+        {
+            List<TipoCombustible> resultados = new List<TipoCombustible>();
+            string procedimiento = "dbo.GetTiposCombustible";
+
+            SqlCommand comando = new SqlCommand(procedimiento, conexion);
+
+            SqlDataReader reader = comando.ExecuteReader();
+
+            while (reader.Read())
+            {
+                TipoCombustible tipo = new TipoCombustible();
+                tipo.id = (long)reader["id"];
+                tipo.denominacion = reader["denominacion"].ToString();
+                resultados.Add(tipo);
+            }
+
+
+            return resultados;
+        }
+
         public static List<Marca> GetMarca()
         {
             List<Marca> marca = null;
             // PREPARO LA CONSULTA SQL PARA OBTENER LOS USUARIOS
-            string consultaSQL = "dbo.GetMarcasPorId";
+            string consultaSQL = "dbo.GetMarca";
             // PREPARO UN COMANDO PARA EJECUTAR A LA BASE DE DATOS
             SqlCommand comando = new SqlCommand(consultaSQL, conexion);
             comando.CommandType = CommandType.StoredProcedure;            
@@ -215,26 +236,65 @@ namespace CarrentalWeb
             return filasAfectadas;
         }
 
-        public static List<Marca> ActualizarMarca(Marca marca)
+        public static int AgregarMarca(Marca marca)
         {
-            List<Marca> resultados = new List<Marca>();
-            string procedimientoAEjecutar = "dbo.ActualizarMarca";
+            string procedimiento = "dbo.AgregarMarca";
 
-            SqlCommand comando = new SqlCommand(procedimientoAEjecutar, conexion);
+            SqlCommand comando = new SqlCommand(procedimiento, conexion);
             comando.CommandType = CommandType.StoredProcedure;
-            SqlDataReader reader = comando.ExecuteReader();
-            while (reader.Read())
-            {
-                marca.id = (long)reader["id"];
-                marca.denominacion = reader["denominacion"].ToString();
-                resultados.Add(marca);
-            }
-            //EJECUTO EL COMANDO
-            //comando.ExecuteNonQuery();
-            return resultados;
+            SqlParameter parametro = new SqlParameter();
+            parametro.ParameterName = "denominacion";
+            parametro.SqlDbType = SqlDbType.NVarChar;
+            parametro.SqlValue = marca.denominacion;
+
+            comando.Parameters.Add(parametro);
+            int filasAfectadas = comando.ExecuteNonQuery();
+
+            return filasAfectadas;
+        }
+
+        //public static int ActualizarMarca(long id, Marca marca)
+        //{
+        //    string procedimiento = "dbo.ActualizarMarca";
+
+        //    SqlCommand comando = new SqlCommand(procedimiento, conexion);
+        //    comando.CommandType = CommandType.StoredProcedure;
+        //    SqlParameter parametro = new SqlParameter();
+        //    parametro.ParameterName = "id";
+        //    parametro.SqlDbType = SqlDbType.BigInt;
+        //    parametro.SqlValue = id;
+        //    comando.Parameters.Add(parametro);
+
+        //    SqlParameter parametroDenominacion = new SqlParameter();
+        //    parametroDenominacion.ParameterName = "denominacion";
+        //    parametroDenominacion.SqlDbType = SqlDbType.NVarChar;
+        //    parametroDenominacion.SqlValue = marca.denominacion;
+        //    comando.Parameters.Add(parametroDenominacion);
+
+        //    int filasAfectadas = comando.ExecuteNonQuery();
+
+        //    return filasAfectadas;
+
+        //public static List<Marca> ActualizarMarca(Marca marca)
+        //{
+        //    List<Marca> resultados = new List<Marca>();
+        //    string procedimientoAEjecutar = "dbo.ActualizarMarca";
+
+        //    SqlCommand comando = new SqlCommand(procedimientoAEjecutar, conexion);
+        //    comando.CommandType = CommandType.StoredProcedure;
+        //    SqlDataReader reader = comando.ExecuteReader();
+        //    while (reader.Read())
+        //    {
+        //        marca.id = (long)reader["id"];
+        //        marca.denominacion = reader["denominacion"].ToString();
+        //        resultados.Add(marca);
+        //    }
+        //    //EJECUTO EL COMANDO
+        //    //comando.ExecuteNonQuery();
+        //    return resultados;
+    
         }
     }
-}
 //        public static List<MarcasNCoches> DameListaMarcasNCoches()
 //        {
 //            List<MarcasNCoches> resultados = new List<MarcasNCoches>();

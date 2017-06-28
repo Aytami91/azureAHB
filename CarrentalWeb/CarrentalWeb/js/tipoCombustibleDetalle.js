@@ -6,7 +6,7 @@
         var id = window.location.search.substring(1).split('=')[1];
 
         // PREPARAR LA LLAMDA AJAX 
-        $.get(`/api/Marcas/${id}`, function (respuesta, estado) {
+        $.get(`/api/TiposCombustible/${id}`, function (respuesta, estado) {
             $('#resultados').html('');
             // COMPRUEBO EL ESTADO DE LA LLAMADA
             if (estado === 'success') {

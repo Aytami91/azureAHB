@@ -1,4 +1,4 @@
-﻿using ApiCarRental;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +12,6 @@ namespace CarrentalWeb
         public int totalElementos { get; set; }
         public List <Usuarios> dataUsuario { get; set; }
         public List<Marca> dataMarcas { get; set; }
+        public List<TipoCombustible> dataTiposCombustible { get; set; }
     }
 }

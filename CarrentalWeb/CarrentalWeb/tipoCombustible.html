@@ -129,7 +129,7 @@
                                 <li><a href="regular.html">Regular Tables</a></li>
                                 <li><a href="extended.html">Extended Tables</a></li>
                                 <li><a href="bootstrap-table.html">Bootstrap Table</a></li>
-                                <li class="active"><a href="Marcas.html">Marcas</a></li>
+                                <li class="active"><a href="tiposCombustible.html">Tipos Combustible</a></li>
                             </ul>
                         </div>
                     </li>
@@ -203,7 +203,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#">Marcas</a>
+                        <a class="navbar-brand" href="#">Tipos Combustible</a>
                     </div>
                     <div class="collapse navbar-collapse">
 
@@ -466,8 +466,9 @@
 		            searchPlaceholder: "Buscar...",
 		        },
 		        ajax: {
-		            url: '/api/Marcas',
-		            dataSrc: 'dataMarcas'
+		            url: '/api/TiposCombustible',
+                    //si me viene la respuesta en json me ahorro la siguiente linea
+		            dataSrc: 'dataTiposCombustible'
 		        },
 		        columns: [
                     {
@@ -476,7 +477,7 @@
                         visible: false
                     },
                     {
-                        title: 'Marca',
+                        title: 'Tipo Combustible',
                         data: 'denominacion'
                     },
                     {
@@ -486,6 +487,7 @@
 		        columnDefs: [
                     {
                         'render': function (data, type, row) {
+                            console.log(row);
                             var contentHTML = '';
                             contentHTML = '<a href="#" class="btn btn-simple btn-info btn-icon view"><i class="fa fa-search"></i></a>';
                             contentHTML += '<a href="#" class="btn btn-simple btn-warning btn-icon edit"><i class="fa fa-edit"></i></a>';
@@ -507,16 +509,16 @@
 		    });
 
             $('#btnCrear').click(function () {
-                window.location.href = `./marcasCrear.html`;
+                window.location.href = `./tipoCombustibleCrear.html`;
             });
 
             function verDetalle(id)
 		    {
-                window.location.href = `./marcaDetalle.html?id=${id}`;
+                window.location.href = `./tipoCombustibleDetalle.html?id=${id}`;
 		    }
 
 		    function editar(id) {
-		        window.location.href = `./marcasEditar.html?id=${id}`;
+		        window.location.href = `./tipoCombustibleEditar.html?id=${id}`;
 		    }
 
 		    function eliminar(id, fila) {
@@ -524,7 +526,7 @@
 		        if (confirm('Estás seguro de eliminar?')) {
 
 		            $.ajax({
-		                url: `/api/Marcas/${id}`,
+		                url: `/api/TiposCombustible/${id}`,
 		                type: "DELETE",
 		                success: function (respuesta) {
 		                    var table = $('#datatables').DataTable();

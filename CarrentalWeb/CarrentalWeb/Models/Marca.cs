@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiCarRental
+namespace CarrentalWeb
 {
     public class Marca
     {
         public long id { get; set; }
+
         public string denominacion { get; set; }
     }
 }

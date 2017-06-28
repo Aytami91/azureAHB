@@ -261,10 +261,19 @@
     <Content Include="assets\js\utilidades.js" />
     <Content Include="Global.asax" />
     <Content Include="js\Dashboard.js" />
+    <Content Include="js\tipoCombustibleCrear.js" />
+    <Content Include="js\tipoCombustibleEditar.js" />
+    <Content Include="js\tipoCombustibleDetalle.js" />
     <Content Include="js\marcaDetalle.js" />
+    <Content Include="js\marcasCrear.js" />
     <Content Include="js\marcasEditar.js" />
     <Content Include="js\usuarios.js" />
     <Content Include="login.html" />
+    <Content Include="tipoCombustibleEditar.html" />
+    <Content Include="tipoCombustibleCrear.html" />
+    <Content Include="tipoCombustibleDetalle.html" />
+    <Content Include="tipoCombustible.html" />
+    <Content Include="marcasCrear.html" />
     <Content Include="marcasEditar.html" />
     <Content Include="plantilla\calendar.html" />
     <Content Include="plantilla\charts.html" />
@@ -304,6 +313,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MarcasController.cs" />
+    <Compile Include="Controllers\TiposCombustibleController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="db\Db.cs" />
     <Compile Include="Global.asax.cs">
